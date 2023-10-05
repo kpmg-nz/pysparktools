@@ -2,5 +2,6 @@
 requires = ['setuptools==65.4.1', 'dunamai==1.8.0', 'jinja2==3.0.3']
 
 [project]
+version = "0.1.0"
 name = "pysparktools"
 description = "Python pckage to simplify working with pyspark by using familiar pandas syntax."
