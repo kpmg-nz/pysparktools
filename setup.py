@@ -45,6 +45,6 @@ setup(
     description='Python pckage to simplify working with pyspark by using familiar pandas syntax.',
     python_requires='>=3.8.0, <3.10',
     setup_requires=[
-        'setuptools==65.4.1', 'dunamai==1.8.0', 'jinja2==3.0.3'
+        'setuptools==65.4.1', 'dunamai==1.8.0', 'jinja2==3.0.3', 'wheel'
     ]
 )
