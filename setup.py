@@ -1,50 +1,21 @@
 #!/usr/bin/env python
 
-from setuptools import setup
-import jinja2
-import os
-from dunamai import (
-    bump_version,
-    serialize_pep440,
-    serialize_pvp,
-    serialize_semver,
-    Version,
-)
+from setuptools import setup, find_packages
+from pysparktools import __version__, __project__
+from datetime import datetime
 
-# get version of package from the GIT version
-version = Version.from_git()
-format_jinja = """
-    {%- if distance == 0 -%}
-        {{ serialize_pep440(base, stage, revision) }}
-    {%- else -%}
-        {{ serialize_pep440(base, stage, revision, post=commit|int(base=16)) }}
-    {%- endif -%}
-"""
-default_context = {
-    "base": version.base,
-    "version": version,
-    "stage": version.stage,
-    "revision": version.revision,
-    "distance": version.distance,
-    "commit": version.commit,
-    "dirty": version.dirty,
-    "env": os.environ,
-    "bump_version": bump_version,
-    "tagged_metadata": version.tagged_metadata,
-    "serialize_pep440": serialize_pep440,
-    "serialize_pvp": serialize_pvp,
-    "serialize_semver": serialize_semver,
-}
-serialized_version = jinja2.Template(format_jinja).render(
-    **default_context
-)
+# create datetime based subversion
+now = datetime.now()
+today_date = datetime.strftime(now, '%Y%m%d')
+today_time = datetime.strftime(now, '%H%M')
+version_sub = '.' + today_date + '.' + today_time
 
 setup(
-    name='pysparktools',
-    version=serialized_version,
+    name = __project__,
+    version = __version__ + version_sub,
+    packages = find_packages(),
     description='Python pckage to simplify working with pyspark by using familiar pandas syntax.',
     python_requires='>=3.8.0, <3.10',
-    setup_requires=[
-        'setuptools==65.4.1', 'dunamai==1.8.0', 'jinja2==3.0.3', 'wheel'
-    ]
+    install_requires=[]
+    
 )
