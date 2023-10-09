@@ -17,5 +17,4 @@ setup(
     description='Python pckage to simplify working with pyspark by using familiar pandas syntax.',
     python_requires='>=3.8.0, <3.10',
     install_requires=[]
-    
 )
